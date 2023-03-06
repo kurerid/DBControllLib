@@ -38,7 +38,7 @@ namespace DBControll
         /// <summary>
         /// Закрывает подключение к базе данных, если оно было ранее создано
         /// </summary>
-        public void Close() 
+        public void Close()
         {
             if (conn == null)
                 return;
@@ -48,6 +48,12 @@ namespace DBControll
         public static bool IsOpen()
         {
             return conn.State == System.Data.ConnectionState.Open;
+        }
+
+        public static NpgsqlConnection GetConnection()
+        {
+            if (IsOpen()) return null;
+            return conn;
         }
     }
 }
