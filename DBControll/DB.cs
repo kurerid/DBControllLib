@@ -40,6 +40,20 @@ namespace DBControll
             return null;
         }
 
+        public T QueryRow<T>(string sql, object[] parameters = null) where T : new()
+        {
+            var response = Query<T>(sql, parameters);
+            if (response == null)
+            {
+                return default;
+            }
+            if (response.Count > 0)
+            {
+                return response[0];
+            }
+            return default;
+        }
+
         private void fillEntity<T>(NpgsqlDataReader reader, T entity)
         {
             for (int i = 0; i < reader.FieldCount; i++)
@@ -85,10 +99,7 @@ namespace DBControll
 
         private bool withRows(string sql)
         {
-            if (sql.ToLower().Contains("select") || sql.ToLower().Contains("returning"))
-                return true;
-            else
-                return false;
+            return sql.ToLower().Contains("select") || sql.ToLower().Contains("returning");
         }
     }
 }

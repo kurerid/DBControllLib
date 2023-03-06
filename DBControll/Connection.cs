@@ -9,7 +9,7 @@ namespace DBControll
 {
     public class Connection
     {
-        private string connectionString { get; set; }
+        private static string connectionString { get; set; }
         private static NpgsqlConnection conn;
 
         /// <summary>
@@ -23,13 +23,13 @@ namespace DBControll
         /// <param name="connectionString"></param>
         public Connection(string connectionString)
         {
-            this.connectionString = connectionString;
+            Connection.connectionString = connectionString;
         }
 
         /// <summary>
         /// Открывает подключение к базе данных
         /// </summary>
-        public void Open()
+        public static void Open()
         {
             conn = new NpgsqlConnection(connectionString);
             conn.Open();
@@ -38,7 +38,7 @@ namespace DBControll
         /// <summary>
         /// Закрывает подключение к базе данных, если оно было ранее создано
         /// </summary>
-        public void Close()
+        public static void Close()
         {
             if (conn == null)
                 return;
@@ -52,7 +52,10 @@ namespace DBControll
 
         public static NpgsqlConnection GetConnection()
         {
-            if (IsOpen()) return null;
+            if (!IsOpen())
+            {
+                Open();
+            }
             return conn;
         }
     }
