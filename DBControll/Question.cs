@@ -11,10 +11,12 @@ namespace DBControll
     {
         public int ID { get; set; }
         public string Content { get; set; }
+        public List<Answer> Answers { get; set; }
 
         public Question(string content)
         {
             Content = content;
+            Answers = new List<Answer>();
         }
     }
 }

@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="Answer.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Form.cs" />

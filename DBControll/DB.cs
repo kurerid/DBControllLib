@@ -101,5 +101,16 @@ namespace DBControll
         {
             return sql.ToLower().Contains("select") || sql.ToLower().Contains("returning");
         }
+
+        public void Add<T>(T entity)
+        {
+            string type = typeof(T).Name;
+
+            for (int i = 0;i< type.Length;i++)
+            {
+
+            }
+            string sql = string.Format($"INSERT INTO {type.ToUpper()}");
+        }
     }
 }
